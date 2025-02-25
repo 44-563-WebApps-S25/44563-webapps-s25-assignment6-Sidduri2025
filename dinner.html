@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaishnavi Sidduri Plans Dinner</title>
+</head>
+<body>
+    <h1>Vaishnavi Sidduri Plans Dinner</h1>
+
+    <form>
+        <label>
+            <input type="checkbox" id="wine" value="True"> Serve wine
+        </label><br>
+        
+        <label>
+            <input type="checkbox" id="outside" value="True"> Eat outside
+        </label><br>
+        
+        <label>
+            <input type="checkbox" id="candles" value="False"> Light candles
+        </label><br><br>
+    </form>
+
+    <button onclick="choices()">Dinner Choices</button>
+
+    <p id="result"></p>
+
+    <script>
+        let my_dinner = {};
+
+        function choices() {
+            my_dinner = {}; // Reset object
+
+            my_dinner.wine = document.getElementById("wine").checked;
+            my_dinner.outside = document.getElementById("outside").checked;
+            my_dinner.candles = document.getElementById("candles").checked;
+
+            document.getElementById("result").innerHTML = 
+                "Dinner Plans: " + JSON.stringify(my_dinner);
+        }
+    </script>
+</body>
+</html>
