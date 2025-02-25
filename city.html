@@ -4,60 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>City Game</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>City game by Vaishnavi Sidduri</h1>
-    <form>
-        <label for="secretCity">Where in the world:</label>
-        <input type="password" id="secretCity" value="San Diego"><br><br>
-    
-        <label for="cityGuess">Guess the city:</label>
-        <input type="text" id="cityGuess"><br><br>
-        <input type="button" value="Check the guess" onclick="checkCity()">
-    </form>
-    <p id="result"></p>
-    <div>
-        <img id="pet1Image" src="image1.jpg" width="150" height="150" onclick="updatePic()" alt="Pet Image">
-    </div>
-    <script>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <h1 class="text-center">City Game by Vaishnavi Sidduri</h1>
         
+        <div class="form-group">
+            <label for="secretCity">Where in the world:</label>
+            <input type="password" id="secretCity" class="form-control" value="San Diego">
+        </div>
+
+        <div class="form-group">
+            <label for="cityGuess">Guess the city:</label>
+            <input type="text" id="cityGuess" class="form-control">
+        </div>
+
+        <button id="checkGuessBtn" class="btn btn-primary btn-block">Check the guess</button>
+        
+        <div id="result" class="mt-3"></div>
+
+        <div>
+            <img id="pet1Image" src="image1.jpg" class="img-fluid" width="150" height="150" onclick="updatePic()" alt="Pet Image">
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
         // Global variables
         let oops = 0;
         let found = 0;
-    function checkCity() {
-           const secretCity = document.getElementById('secretCity').value;
-           const cityGuess = document.getElementById('cityGuess').value;
-           if (cityGuess.toLowerCase() === secretCity.toLowerCase()) {
-          found++;
-          alert("GotCha");
-          } else {
-          oops++;
-          alert("Awe");
-          }
-         document.getElementById('result').innerHTML = `Oops: ${oops} | Found: ${found}`;
+
+        // Function to check the city guess
+        function checkCity() {
+            const secretCity = document.getElementById('secretCity').value;
+            const cityGuess = document.getElementById('cityGuess').value;
+
+            // Check if the guess is correct
+            if (cityGuess.toLowerCase() === secretCity.toLowerCase()) {
+                found++;
+                alert("GotCha");
+            } else {
+                oops++;
+                alert("Awe");
+            }
+
+            // Update the display of correct and wrong guesses
+            document.getElementById('result').innerHTML = `Oops: ${oops} | Found: ${found}`;
+
+            // If wrong guesses exceed twice the correct guesses, change onclick to display alert
+            if (oops > 2 * found) {
+                document.getElementById('checkGuessBtn').onclick = function() {
+                    alert("Sorry, too many wrong guesses.");
+                };
+            }
         }
-         
+
+        // Function to update the pet image when clicked
         let usePic = 1;
 
-function updatePic() {
-    let petImage = document.getElementById("petImage");
+        function updatePic() {
+            let petImage = document.getElementById("pet1Image");
 
-    switch (usePic) {
-        case 1:
-            petImage.src = "pet2.jpg";
-            usePic = 2;
-            break;
-        case 2:
-            petImage.src = "pet6.jpg";
-            usePic = 3;
-            break;
-        case 3:
-            petImage.src = "pet1.jpg";
-            usePic = 1;
-            break;
-    }
-    }
+            switch (usePic) {
+                case 1:
+                    petImage.src = "pet2.jpg";
+                    usePic = 2;
+                    break;
+                case 2:
+                    petImage.src = "pet6.jpg";
+                    usePic = 3;
+                    break;
+                case 3:
+                    petImage.src = "pet1.jpg";
+                    usePic = 1;
+                    break;
+            }
+        }
 
+        // Set the initial onclick function for the button
+        document.getElementById("checkGuessBtn").onclick = checkCity;
     </script>
 </body>
 </html>
