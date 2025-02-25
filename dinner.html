@@ -8,6 +8,7 @@
 <body>
     <h1>Vaishnavi Sidduri Plans Dinner</h1>
 
+    <!-- Checkbox Form -->
     <form>
         <label>
             <input type="checkbox" id="wine" value="True"> Serve wine
@@ -26,6 +27,17 @@
 
     <p id="result"></p>
 
+    <!-- New Form for Main Dish and Dessert -->
+    <form>
+        <label for="mainDish">Enter main dish:</label>
+        <input type="text" id="mainDish" value="Butter Chicken"><br><br>
+
+        <label for="dessert">Enter dessert:</label>
+        <input type="text" id="dessert"><br><br>
+
+        <button type="button" onclick="updateDinner()">Update the Dinner</button>
+    </form>
+
     <script>
         let my_dinner = {};
 
@@ -39,6 +51,18 @@
             document.getElementById("result").innerHTML = 
                 "Dinner Plans: " + JSON.stringify(my_dinner);
         }
+
+        function updateDinner() {
+            let mainDish = document.getElementById("mainDish").value;
+            let dessert = document.getElementById("dessert").value;
+
+            my_dinner.main = mainDish;
+            my_dinner.dessert = dessert;
+
+            document.getElementById("result").innerHTML = 
+                "Dinner Plans: " + JSON.stringify(my_dinner);
+        }
     </script>
 </body>
 </html>
+
